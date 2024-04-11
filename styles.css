@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.vault {
+    width: 400px;
+    height: 400px;
+    background-color: gray;
+    display: flex;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    border: 4px solid black;
+}
+
+.door {
+    background-color: darkgray;
+    flex-grow: 1;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: all 1.5s;
+    backface-visibility: hidden;
+    position: relative;
+}
+
+.door:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    background-color: rgb(78, 78, 78);
+}
+
+.lever {
+    position: absolute;
+    top: 180px;
+    left: 240px;
+    width: 30px;
+    height: 100px;
+    background-color: brown;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+#lever2 {
+    top: 215px;
+    left: 205px;
+    height: 30px;
+    width: 100px;
+}
+
+.clicked {
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

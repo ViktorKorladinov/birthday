@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dropdown Selection</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    #container {
+        text-align: center;
+    }
+    #result {
+        margin-bottom: 20px;
+    }
+    .dropdown-container {
+        display: inline-block;
+    }
+    input, 
+    .dropdown {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    input {
+        width: 30px;
+    }
+    .correct {
+        border-color: green;
+    }
+    .incorrect {
+        border-color: red;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div>
+    Ahoj, jmenuju se
+    <div class="dropdown-container">
+        <select id="dropdown1" class="dropdown">
+            <option value=""> </option>
+            <option value="option1">Veronika</option>
+            <option value="option2">Barča</option>
+            <option value="option3">Ročinová</option>
+        </select>
+    </div>
+    a je mi 
+    <input type="text"/>
+    <div class="dropdown-container">
+        <select id="dropdown2" class="dropdown">
+            <option value=""> </option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div>
+    <div class="dropdown-container">
+        <span class="label">Third Option:</span>
+        <select id="dropdown3" class="dropdown">
+            <option value="" selected="selected">Choose an option...</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div>
+</div>
+</div>
+<script>
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('change', function() {
+            const selectedValue = this.value;
+            if (selectedValue === 'option3') {
+                this.classList.remove('incorrect');
+                this.classList.add('correct');
+            } else {
+                this.classList.remove('correct');
+                this.classList.add('incorrect');
+            }
+        });
+    });
+</script>
+</body>
+</html>
