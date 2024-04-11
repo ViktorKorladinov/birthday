@@ -1,29 +1,35 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     margin: 0;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .vault {
-    width: 400px;
-    height: 400px;
-    background-color: gray;
+    width: 320px;
+    height: 320px;
+    background-color: darkgray;
     display: flex;
     perspective: 1200px;
     transform-style: preserve-3d;
-    border: 4px solid black;
+    border: 4px solid gray;
 }
 
 .door {
-    background-color: darkgray;
+    background:linear-gradient( to bottom, #bcc6cc, #eee, #bcc6cc);
     flex-grow: 1;
     transform-style: preserve-3d;
     transform-origin: left center;
     transition: all 1.5s;
     backface-visibility: hidden;
     position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+
 }
 
 .door:before {
@@ -39,23 +45,42 @@ body {
     background-color: rgb(78, 78, 78);
 }
 
-.lever {
+.levers{
     position: absolute;
-    top: 180px;
-    left: 240px;
-    width: 30px;
-    height: 100px;
+    top: 160px;
+    left: 180px;
+    width: 90px;
+    height: 90px;
+}
+
+.lever{
     background-color: brown;
     border-radius: 10px;
     cursor: pointer;
+    position: absolute;
+}
 
+#lever {
+    left:37px;
+    width: 16px;
+    height: 90px;
 }
 
 #lever2 {
-    top: 215px;
-    left: 205px;
-    height: 30px;
-    width: 100px;
+    top: 37px;
+    height: 16px;
+    width: 90px;
+}
+#pass{
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.letter {
+    
+    font-size:16px;
+    width: 16px;
+    border-radius: 5px;
 }
 
 .clicked {
@@ -82,3 +107,120 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.flashlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 80px, rgba(0, 0, 0, 0.8) 160px); 
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9999; 
+}
+
+.switch{
+    position: absolute;
+    right:5%;
+}
+
+#secret{
+    display: none;
+    position: absolute;
+    top:65%;
+    left:50%;
+    z-index: 2;
+    color:transparent;
+    transition: color 0.7s ease-in;
+}
+
+*, *:before, *:after {
+    transition:.2s ease-in-out;
+  }
+  
+  #light-switch {
+    position:absolute;
+    left:0;
+    top:0;
+    opacity:0;
+    &:checked ~ #background {
+      background-color:#ebdbac;
+    }
+    &:checked ~ #light-switch-label {
+      box-shadow:0 2px 2px #d0b57b;
+      .switch {
+        box-shadow:0 10px 10px -5px rgba(233,219,176,1), 0 0 0 1px rgba(0,0,0,.1), 0 0 0 4px #fff4d3,0 0 0 5px rgba(0,0,0,.1);
+        &:before {
+          height:75px;
+          top:0px;
+          line-height:75px;
+          background:#fff4d3;
+          color:#64bf60;
+          text-shadow: 0 0 3px #38ff2e;
+        }
+        &:after {
+          height:70px;
+          bottom:5px;
+          line-height:70px;
+          background:#fffaea;
+          box-shadow:0 5px 0 #d0b57b;
+          color:#d7bf95;
+          text-shadow:0 0 0px transparent;
+        }
+      }
+    }
+  }
+  
+  #light-switch-label {
+    position:relative;
+    display:block;
+    height:30px;
+    width:20px;
+    z-index:1;
+    margin:100px auto 0 auto;
+    background-color:#fff4d3;
+    border-radius:10px;
+    .switch {
+      cursor:pointer;
+      height:150px;
+      width:100px;
+      background:#fffaea;
+      position:absolute;
+      top:50%;
+      left:50%;
+      margin:-75px 0 0 -50px;
+      border-radius:5px;
+      overflow:hidden;
+      box-shadow:0 10px 10px -5px rgba(233,219,176,0), 0 0 0 1px rgba(0,0,0,.1), 0 0 0 4px #fff4d3,0 0 0 5px rgba(0,0,0,.1);
+      &:before {
+        content:'ON';
+        display:block;
+        position:absolute;
+        height:70px;
+        text-align:center;
+        line-height:70px;
+        width:100px;
+        top:5px;
+        left:0;
+        background:#efe0b1;
+        color:#aaa398;
+        border-radius:5px 5px 0 0;
+      }
+      &:after {
+        content:'OFF';
+        display:block;
+        position:absolute;
+        height:75px;
+        text-align:center;
+        line-height:75px;
+        width:100px;
+        bottom:0;
+        left:0;
+        background:#fff4d3;
+        color:#a4441a;
+        text-shadow: 0 0 3px #ff4e00;
+        border-radius:0 0 5px 5px;
+      }
+    }
+  }

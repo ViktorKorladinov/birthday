@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<title>Vault</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Vault</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<div class="vault" id="vault" tabindex="0">
-  <div class="door" id="door">
-  <div class="lever" id="lever"></div>
-  <div class="lever" id="lever2"></div>
-</div>
-</div>
-<script src="script.js"></script>
+  <div id="secret" onclick="window.location.href = '/quizz.html';" >poslední část</div>
+  <div class="switch">
+    <input type="checkbox" id="light-switch" />
+    <label for="light-switch" id="light-switch-label">
+      <div class="switch" id="switch"></div>
+    </label>
+  </div>
+  <div class="flashlight" id="flashlight"></div>
+  <div class="container">
+    <div class="vault" id="vault" tabindex="0">
+      <div class="door" id="door">
+        <div id="pass">
+          <input class="letter" id="p1"  maxlength="1">
+          <input class="letter" id="p2"  maxlength="1">
+          <input class="letter" id="p3"  maxlength="1">
+          <input class="letter" id="p4"  maxlength="1">
+          <input class="letter" id="p5"  maxlength="1">
+          <input class="letter" id="p6"  maxlength="1">
+          <input class="letter" id="p7"  maxlength="1">
+        </div>
+
+        <div class="levers">
+          <div class="lever" id="lever"></div>
+          <div class="lever" id="lever2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
+
 </html>

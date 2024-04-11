@@ -1,93 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dropdown Selection</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    #container {
-        text-align: center;
-    }
-    #result {
-        margin-bottom: 20px;
-    }
-    .dropdown-container {
-        display: inline-block;
-    }
-    input, 
-    .dropdown {
-        padding: 10px;
-        font-size: 16px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        margin-right: 10px;
-    }
-    input {
-        width: 30px;
-    }
-    .correct {
-        border-color: green;
-    }
-    .incorrect {
-        border-color: red;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>finále</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #result {
+            margin-bottom: 20px;
+        }
+
+        .dropdown-container {
+            display: inline-block;
+        }
+
+        input,
+        .dropdown {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        input {
+            width: 70px;
+        }
+
+        .small {
+            width: 30px;
+        }
+
+        .correct {
+            border-color: green;
+        }
+
+        .incorrect {
+            border-color: red;
+        }
+    </style>
 </head>
+
 <body>
-<div id="container">
-    <div>
-    Ahoj, jmenuju se
-    <div class="dropdown-container">
-        <select id="dropdown1" class="dropdown">
-            <option value=""> </option>
-            <option value="option1">Veronika</option>
-            <option value="option2">Barča</option>
-            <option value="option3">Ročinová</option>
-        </select>
+    <div id="container">
+        <div>
+            Ahoj, jmenuju se
+            <div class="dropdown-container">
+                <select autocomplete="off" id="dropdown1" class="dropdown">
+                    <option value="" selected disabled hidden></option>
+                    <option value="option1">Veronika</option>
+                    <option value="option2">Barča</option>
+                    <option value="option3">Ročinová</option>
+                </select>
+            </div> a bydlím
+            <div class="dropdown-container">
+                <select autocomplete="off" id="dropdown2" class="dropdown">
+                    <option value="" selected disabled hidden> </option>
+                    <option value="option1">v Letňanech</option>
+                    <option value="option2">20 minut od mostíku</option>
+                    <option value="option3">U Fresca</option>
+                </select>
+            </div>
+            . Je mi
+            <input class="small" type="text" maxlength="2" id="age" autocomplete="off" />.
+            <div class="dropdown-container">
+                <span class="label">a můj nejoblibenější typ baterie je</span>
+                <input autocomplete="off" type="text" id="battery" />.
+            </div>
+        </div>
     </div>
-    a je mi 
-    <input type="text"/>
-    <div class="dropdown-container">
-        <select id="dropdown2" class="dropdown">
-            <option value=""> </option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-        </select>
-    </div>
-    <div class="dropdown-container">
-        <span class="label">Third Option:</span>
-        <select id="dropdown3" class="dropdown">
-            <option value="" selected="selected">Choose an option...</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-        </select>
-    </div>
-</div>
-</div>
-<script>
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('change', function() {
-            const selectedValue = this.value;
-            if (selectedValue === 'option3') {
-                this.classList.remove('incorrect');
-                this.classList.add('correct');
+    <script>
+        const age = document.getElementById("age")
+        const bat = document.getElementById("battery")
+        age.addEventListener("keydown", (event) => {
+            if (event.key != 'Backspace') {
+                event.preventDefault()
+                if (age.value.length === 0) {
+                    age.value += 6
+                } else if (age.value.length === 1) {
+                    age.value += 1
+                    age.classList.add('correct')
+                    age.classList.remove('incorrect')
+                }
             } else {
-                this.classList.remove('correct');
-                this.classList.add('incorrect');
+                age.classList.add('incorrect')
+                age.classList.remove('correct')
             }
+            check()
+        })
+        bat.addEventListener("keydown", (event) => {
+            a = event.key
+            if(event.key=='Backspace') a= ''
+            if (["cr 2032", "2032", "cr2032"].includes(bat.value.toLowerCase()+a)) {
+                    bat.classList.add('correct')
+                    bat.classList.remove('incorrect')
+            } else {
+                bat.classList.add('incorrect')
+                bat.classList.remove('correct')
+            }
+            check();
+        })
+
+
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function () {
+                const selectedValue = this.value;
+                if (selectedValue === 'option3') {
+                    this.classList.remove('incorrect');
+                    this.classList.add('correct');
+                } else {
+                    this.classList.remove('correct');
+                    this.classList.add('incorrect');
+                }
+                check();
+            });
         });
-    });
-</script>
+        let check = () => {
+            if(document.querySelectorAll(".correct").length == 4){
+                document.getElementById("container").innerHTML = "Ahoj, jmenuju se Ročinová a bydlím u <b>F</b>resca. Je mi 6<b>1</b> a můj nejoblibenější typ baterie je CR 203<b>2.</b>"
+                console.log("Darek: ","https://www.transfernow.net/dl/20240411JtEAR4D6",":)")
+            }
+        }
+    </script>
 </body>
+
 </html>
